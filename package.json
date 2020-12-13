@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "yarn run watch:css & vue-cli-service serve",
+    "build": "yarn run build:css && vue-cli-service build",
+    "build:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/index.css",
+    "watch:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/index.css -w",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
@@ -29,19 +31,23 @@
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^2.0.0-0",
+    "autoprefixer": "^9",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^7.0.0-0",
     "husky": "^4.3.5",
     "node-sass": "^4.12.0",
+    "postcss": "^7",
+    "postcss-cli": "^7",
     "sass-loader": "^8.0.2",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "yarn lint",
-      "pre-push":"yarn test:unit"
+      "pre-push": "yarn test:unit"
     }
   }
 }
